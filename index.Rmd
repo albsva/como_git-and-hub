@@ -1,0 +1,471 @@
+---
+title: "Git+GitHub"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Trabalhando em conjunto
+
+O que é versionamento de código?
+
+Versionamento é como tirar "fotos" do seu projeto ao longo do tempo. Ele
+permite que você volte atrás, experimente sem medo e acompanhe cada
+alteração feita no código.
+
+### Git e GitHub: a dupla essencial
+
+**Git** é o sistema de versionamento mais popular do mundo. Ele roda no
+seu computador e gerencia o histórico local do projeto. Com ele, você
+cria versões (chamadas de `commits`), volta no tempo, cria ramificações
+(`branches`) e junta alterações.
+
+**GitHub** é uma plataforma *online* que armazena repositórios Git na
+nuvem. Ele facilita o trabalho em equipe, permitindo que várias pessoas
+colaborem no mesmo projeto, revisem código e acompanhem tarefas.
+
+#### Fluxo básico
+
+-   `git init` – começa o versionamento no seu projeto
+-   `git add` – prepara as mudanças
+-   `git commit` – salva uma versão com descrição
+-   `git push` – envia as versões para o GitHub
+-   `git pull` – traz atualizações do GitHub para o seu computador
+
+### Por que aprender?
+
+1)  Segurança: nunca mais perca um código importante
+2)  Colaboração: trabalhe com outras pessoas sem sobrescrever o trabalho
+    delas
+3)  Portfólio: o GitHub é o currículo de quem programa 
+
+## GitHub
+
+Agora vamos a como criar um repositório no GitHub e sincronizá-lo com o
+RStudio.
+
+Para isso precisamos:
+
+1.  Ter instalado o [R](https://cran.r-project.org/) e RStudio
+    [RStudio](https://www.rstudio.com/)
+
+2.  Criar uma conta no [Github](https://github.com/)
+
+3.  Baixar e instalar o [Git](https://git-scm.com/) localmente <br><br>
+
+O primeiro passo 1 já foi concluído como (espero... rs), então vamos às
+próximas. <br><br>
+
+Pra quem é usuário de Python, vamos ter uma sessão adicional logo ao
+final. Caso queira pular os passos do R, [clique aqui](#git-python).
+
+PS: este tutorial de Git e GitHub foi adaptado do material criado pelos
+colegas [Thiago
+Silveira](https://peld-iloc.github.io/Peld_Iloc_Data_WS/github.html#4_Git),
+[Maurício Vancine](https://github.com/mauriciovancine/workshop-git-github-rstudio)
+e [Ben Best](https://noaa-iea.github.io/r3-train/collaborate.html).
+<br><br>
+
+### Criando uma conta no GitHub
+
+Para criar uma conta no `GitHub` basta acessar o site
+<https://github.com/>, clicar em `Sign up` no canto superior direito da
+tela e seguir as instruções.
+
+<center><img src="figs/github1.png" style="width:100%"/></center>
+
+<br><br>
+
+<center><img src="figs/github2.png" style="width:100%"/></center>
+
+<br><br>
+
+Depois de criado, basta acessar seu `GitHub`. <br><br>
+
+
+### Instalando o Git
+
+
+O `Git` é o sistema de controle de versão mais popular do mundo. Ele é
+um software de código aberto que permite aos desenvolvedores rastrear
+mudanças em seus projetos, colaborar com outros e gerenciar diferentes
+versões do código. O `Git` é amplamente utilizado em projetos de
+software, mas também pode ser aplicado a qualquer tipo de projeto que
+envolva arquivos e mudanças frequentes.
+
+Para instalar o `Git`, siga as instruções abaixo de acordo com o seu
+sistema operacional: - **Windows**: Baixe o instalador do `Git` para
+Windows em <https://git-scm.com/download/win> e siga as instruções de
+instalação.
+
+-   **Mac**
+    -   Se você tiver o Homebrew instalado, pode usar o comando no
+        Terminal: `brew install git`
+    -   Alternativamente, você pode baixar o instalador do `Git` para
+        Mac em <https://git-scm.com/download/mac> e seguir as instruções
+        de instalação.
+-   **Linux**: Use o gerenciador de pacotes da sua distribuição para
+    instalar o `Git`. Por exemplo, em distribuições baseadas no
+    Debian/Ubuntu, você pode usar: `sudo apt-get update`
+    `sudo apt-get install git` Após a instalação, você pode verificar se
+    o `Git` foi instalado corretamente abrindo um terminal e digitando:
+    `git --version`
+
+Isso deve retornar a versão do `Git` instalada no seu sistema. <br><br>
+
+### Configurando o Git no RStudio
+
+Agora, vamos ao RStudio para configurar o acesso do `Git`. No RStudio
+ache a aba **Terminal** e insira os seguintes comados, um de cada vez.
+<br><br>
+
+Substitua `USER` e `USER@SEUEMAIL.COM` com o seu. No meu caso seria
+`cammcordeiro` e `cammcordeiro@pq.uenf.br`.
+
+```{r, eval=FALSE}
+
+# mostrando a versão do git em seu computador
+git --version
+
+# mostrando o caminho das pastas em seu Mac/Linux
+which git
+
+# mostrando o caminho das pastas no Windows
+where git
+
+# troque USUARIO com o seu nome de usuário do Github
+git config –-global user.name USUARIO
+
+# troque USUARIO@SEUEMAIL com o seu email resgistrado no Github
+git config –-global user.email USUARIO@SEUEMAIL.COM
+
+# listando "config" para confirmar as variáveis de user.* 
+git config --list
+
+# use git "merge" (default) para resolver possíveis conflitos git "pull" conflicts
+git config --global pull.rebase true
+
+```
+
+<br><br>
+
+Agora acesse **Tools -\> Global Options** e selecione **Git/SVN** no
+menu lateral. No campo *Git executable* insira o caminho das pastas
+baseados nos comandos anteriores (Note que eles são diferentes para
+Mac/Linux `which git` e Windows `where git`).<br><br>
+
+
+### Configurando uma chave SSH (Dentro do RStudio)
+
+O primeiro passo é abrir o menu `Options`, clicar em `Git/SVN` e depois clicar no botão `Create RSA Key...`. <br></br>
+
+<center><img src="figs/SSH1.png" style="width:50%"/></center>
+<br></br>
+
+RStudio irá gerar uma chave SSH para você. Neste passo você tem a opção de proteger essa chave com uma senha, mas isso não é obrigatório.
+Depois disso, clique no botão `View public key` e copie a chave pública gerada. 
+
+<center><img src="figs/SSH2.png" style="width:80%"/></center>
+<br></br>
+
+Agora, acesse o site do GitHub, vá para as configurações da sua conta, clique em `SSH and GPG keys`, depois em `New SSH key`, cole a chave pública copiada e salve. Pronto! Agora você pode usar o GitHub com autenticação SSH diretamente do RStudio sem precisar digitar suas credenciais toda vez.
+
+<center><img src="figs/SSH3.png" style="width:80%"/></center>
+<br></br>
+
+
+### Configurando uma chave SSH (Fora do RStudio)
+
+SSH (Secure Shell) é um protocolo seguro de comunicação. Ao configurar
+uma chave SSH no GitHub, você evita digitar suas credenciais toda vez
+que interagir com o repositório (ex. fazer `push` ou `pull`).
+
+Para configurar uma chave SSH, siga as instruções detalhadas em [GitHub
+Docs](https://docs.github.com/en/authentication/connecting-to-github-with%20-ssh).
+
+Este processo envolve a geração de uma chave SSH em seu computador e a
+adição dessa chave à sua conta do GitHub. <br><br>
+
+#### Passo 1: Verificar se você já tem uma chave SSH
+
+Abra o terminal (ou Git Bash no Windows) e digite:
+
+`ls -al ~/.ssh`
+
+Procure por arquivos chamados `id_ed25519.pub` ou `id_rsa.pub`. Se
+existirem, você já tem uma chave. Pule para o Passo 3. <br><br>
+
+#### Passo 2: Gerar uma nova chave SSH
+
+No terminal, digite (substitua o e-mail pelo seu):
+
+O terminal vai perguntar:
+
+`ssh-keygen -t ed25519 -C "seu-email@exemplo.com"`
+
+
+* Nota: se o sistema não suportar ed25519, 
+`use ssh-keygen -t rsa -b 4096 -C "seu-email@exemplo.com"`
+
+* Onde salvar a chave? Aperte `Enter` para aceitar o local padrão. 
+* Senha? É opcional, mas recomendado. Se colocar, vai precisar digitá-la ao usar a
+chave. Pronto! A chave foi gerada. <br><br>
+
+
+#### Passo 3: Adicionar a chave ao ssh-agent
+
+* Inicie o ssh-agent:
+
+`eval "$(ssh-agent -s)"`
+
+*Adicione a chave privada:
+
+`ssh-add ~/.ssh/id_ed25519`
+<br><br>
+
+#### Passo 4: Copiar a chave pública
+
+A chave pública é a que você vai colar no GitHub. Para copiar:
+
+**Linux/Mac:**
+
+`cat ~/.ssh/id_ed25519.pub`
+
+Selecione e copie a saída (começa com ssh-ed25519).
+
+**Windows (Git Bash):**
+
+`clip < ~/.ssh/id_ed25519.pub`
+
+Já copia direto para a área de transferência. <br><br>
+
+#### Passo 5: Adicionar a chave no GitHub
+
+* Acesse github.com/settings/keys (logado no GitHub)
+* Clique em "New SSH Key"
+  - Título: um nome descritivo (ex: "Meu notebook pessoal")
+  
+* Tipo de chave: Authentication Key
+* Chave: cole a chave pública copiada
+* Clique em "Add SSH Key"
+<br><br>
+
+#### Passo 6: Testar a conexão
+
+No terminal, digite:
+
+`ssh -T git@github.com`
+
+Você verá uma mensagem como:
+*Hi seu-usuario! You've successfully authenticated...*
+
+Se pedir confirmação de *fingerprint*, digite `yes`.
+<br><br>
+
+#### Passo 7: Usar SSH nos seus repositórios
+
+Agora, ao clonar ou configurar um repositório, use a URL SSH:
+
+`bash git clone git@github.com:usuario/repositorio.git`
+
+Para converter um repositório HTTPS para SSH:
+
+`$bash git remote set-url origin git@github.com:usuario/repositorio.git`
+<br><br>
+
+Essa configuração parece ser desafiadora em um primeiro momento, mas
+felizmente este procedimento é bem documentado em [Happy Git and GitHub
+for the
+useR](https://happygitwithr.com/rstudio-see-git.html#tell-rstudio-where-to-find-git)
+se tiver algum problema.<br><br>
+
+### Criando repositório (ou REPO) no GitHub
+
+Após a instalação e configuração do **Git/R/RStudio** e criar uma conta
+no **Github**, o próximo passo é criar repositório.
+
+Logo após fazer o login no **Github** você deverá ver a página inicial
+de seu perfil como abaixo.
+
+<center><img src="figs/git_5.png" style="width:100%"/></center>
+
+<br><br>
+
+À esquerda você poderá ver a lista com alguns repositórios e o botão
+**New**. Clique neste botão para criarmos um novo repositório. Nesta
+página você vai configurar o seu repositório:
+
+1.  Dê um nome para seu repositório
+2.  Especifique se será público ou privado
+3.  Especifique se você quer adicionar um aquivo README, **.gitignore**
+    e o tipo de licença (caso seja público. Mais detalhes no link "learn
+    more")
+
+<center><img src="figs/git_6.png" style="width:70%"/></center>
+
+Depois de configurado você pode clicar em **Create repository**.
+
+Agora que temos o repositório no Github, o próximo passo é cloná-lo com
+um projeto de controle de versão no RStudio. Deixe a página acima aberta
+no seu navegador, pois vamos precisar dela no próximo passo. <br><br>
+
+### Criando projeto no RStudio clonando o repositório do Github
+
+1.  Abra o RStudio e clique em **File -\> New Project**
+
+2.  Uma caixa irá abrir, selecione **Version Control**
+
+<center><img src="figs/git_7.png" style="width:70%"/> <br><br></center>
+
+3.  Logo após abrirá em outra janela, selecione **Git**. Uma nova janela
+    abrirá.
+
+<center><img src="figs/git_8.png" style="width:70%"/> <br><br></center>
+
+4.  Volte ao Github, copie a URL do repo que você criou em **4.2 Criando
+    repositório no GitHub**
+
+<center><img src="figs/git_9.png" style="width:100%"/> <br><br></center>
+
+5.  Volte ao RStudio e cole a URL do repo em **Repository URL**
+
+<center><img src="figs/git_10.png" style="width:70%"/> <br><br></center>
+
+6.  Na mesma janela digite o nome do diretório em **Project directory
+    name**
+
+7.  Ainda na mesma janela, selecione a pasta onde colocar o repositório
+    clonado do github no campo **Create project as subdirectory of**
+    <br><br>
+
+Se tudo ocorreu sem problemas até aqui, você clonou o repo do **Github**
+em sua máquina. A partir de agora você está apto a realizar mundanças
+controladas pelo **Git** e sincronizar tudo no repositório *on line*.
+
+Nas próximas seções veremos alguns comandos básicos de controle de
+versão no nosso repo recém criado.
+
+------------------------------------------------------------------------
+
+## Workflow RStudio/Github
+
+### Controle de versão: `commit` e `push`
+
+Agora podemos criar um script teste para fazermos o primeiro `commit` e
+`push`, abaixo um resumo do será realizado:
+
+| Comando  |                           Ação                           |
+|:--------:|:--------------------------------------------------------:|
+| `commit` | Nova versão, anota as alterações salvas e cria um código |
+|  `push`  |    Envia as alterações para seu repositório no Github    |
+
+Observando o painel **Files** no **RStudio** você verá que alguns
+arquivos foram adicionados. Temos um **.gitignore**, **.Rhistory** e
+**teste_repositorio.Rproj**. Criando um novo script e salvando
+(script_teste.R), o painel **Files** ficará como abaixo.
+
+<center><img src="figs/git_11.png" style="width:70%"/> <br><br></center>
+
+Após a criar e salvar um script teste, o painel **Git** deve estar
+parecido como o abaixo:
+
+<center><img src="figs/git_12.png" style="width:70%"/> <br><br></center>
+
+Veja que estão listados alguns arquivos, toda e qualquer alteração salva
+neste diretório será listada neste painel. Se você selecionar **Staged**
+você está aprovando a mundança no arquivo. Em **Status** pode ser **A**
+de "added", **M** significa "modified" e ainda não adicionado.
+
+<center><img src="figs/git_13.png" style="width:70%"/> <br><br></center>
+
+Com todos os arquivos marcados **Staged**, o próximo passo é fazer um
+`commit`, ou seja, registrar (ou anotar) todas as alterações realizadas,
+pois podo o `commit` deve ter uma mensagem indicando o que foi
+realizado. Clicando em **commit** você registra as alterações e pode
+comentar as principais mudanças no campo **Commit message**, por
+exemplo. Clique em `commit` nesta janela **Review Changes**.
+
+<center><img src="figs/git_14.png" style="width:70%"/> <br><br></center>
+
+Após isso você verá a janela abaixo mostrando a execução do comando
+`commit`.
+
+<center><img src="figs/git_15.png" style="width:70%"/> <br><br></center>
+
+Após isso estamos aptos para fazer o `push`. Clicando em `push` você
+envia de fato a nova versão para o seu repo no Github.
+
+<center><img src="figs/git_16.png" style="width:70%"/> <br><br></center>
+
+Depois de chegar até aqui, confira seu repositório no **Github** e veja
+a versão atualizada. Deve estar similar a figura abaixo.
+
+<center><img src="figs/git_17.png" style="width:70%"/> <br><br></center>
+
+### Colaboração: `fork`, `branch`, `pull request` e `merge`
+
+Agora que já vimos como fazer as principais ações usando o **Git** e
+**Github**, a partir deste ponto podemos executar um grupo de comandos
+que consiste na grande vantagem de se usar o **Github**: a colaboração
+com controle de versão. Abaixo um resumo dos comandos abordados:
+
+|    Comando     |                    Ação                    |
+|:--------------:|:------------------------------------------:|
+|     `fork`     |        Copia um diretório do Github        |
+|    `branch`    |   Cria um novo "ramo" em seu repositório   |
+| `pull request` |         Solitação de contribuição          |
+|    `merge`     | Incorporar um ramo criado ao ramo "master" |
+
+<br><br>
+
+Para colaborar em um repositório você antes de mais nada copiar os
+arquivos para o seu **Github**. Essa ação é executada com o comando
+`fork`. Por exemplo, se dirija ao [respositório de teste -
+**ciencia_colab_a4**](https://github.com/cammcordeiro/ciencia_colab_a4)
+e localize no alto da página o botão `fork`. Depois escolha onde você
+gostaria de colocar, escolha seu usuário. No canto esquerdo da página
+mostrará que o reposotório está em seu usuário também.
+
+<center><img src="figs/git_22.png" style="width:60%"/> <br><br></center>
+
+Agora faça novamente os passos descritos em **Criando repositório no
+GitHub**. Tenha certeza de criar uma nova pasta fora das pastas que você
+já está trabalhando.
+
+Abra o projeto do repositório clonado (CCBD_atividade4) no RStudio.
+Agora o repositório deve ser acessado pelo
+<https://github.com/SEU_USUÁRIO/ciencia_colab_a4>. Abra o arquivo
+`partipantes.csv`, e edite adicionando seu nome e nome de usuário do
+`GitHub`. Salve, faça o `commit` e o `push`.
+
+Agora navegue até o [respositório da atividade
+4](https://github.com/cammcordeiro/ciencia_colab_a4) recém clonado e
+clique em **Contribute**.
+
+<center><img src="figs/git_23.png" style="width:60%"/> <br><br></center>
+
+Aparecerá uma nova página comparando o script antigo com o novo.
+
+<center><img src="figs/git_24.png" style="width:60%"/> <br><br></center>
+
+Clique em **Create pull request**. Com o objetivo de facilitar a
+colaboração, é necessário que você comente o objetivo da sua
+contribuição.
+
+<center><img src="figs/git_25.png" style="width:60%"/> <br><br></center>
+
+Clique novamente no botão **Create pull request** para confirmar sua
+contribuição. Visualize a página
+<https://cammcordeiro.github.io/ciencia_colab_a4> e veja como ficou.
+
+<center><img src="figs/git_26.png" style="width:60%"/> <br><br></center>
+
+Agora que você fez um `pull request`, e basta aguardar o administrador
+do repositório analisar sua sugestão e fazer o `merge` no ramo
+**master**.
+
+Para mais informações sobre o workflow usando o Github, acesse [Github
+Guides](https://guides.github.com/introduction/flow/). Um guia muito
+útil também é o [Happy Git and Github for the
+useR](https://happygitwithr.com/).
