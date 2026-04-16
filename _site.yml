@@ -1,0 +1,12 @@
+name: "como Git and Hub"
+navbar:
+  title: "como Git and Hub!"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Participantes"
+      href: participantes.html
+output:
+  html_document:
+    highlight: textmate
+    css: styles.css

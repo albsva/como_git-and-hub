@@ -8,11 +8,11 @@ editor_options:
 
 # Trabalhando em conjunto
 
-O que é versionamento de código?
+* O que é versionamento de código?
 
 Versionamento é como tirar "fotos" do seu projeto ao longo do tempo. Ele
 permite que você volte atrás, experimente sem medo e acompanhe cada
-alteração feita no código.
+alteração feita no código. <br></br>
 
 ### Git e GitHub: a dupla essencial
 
@@ -23,7 +23,7 @@ cria versões (chamadas de `commits`), volta no tempo, cria ramificações
 
 **GitHub** é uma plataforma *online* que armazena repositórios Git na
 nuvem. Ele facilita o trabalho em equipe, permitindo que várias pessoas
-colaborem no mesmo projeto, revisem código e acompanhem tarefas.
+colaborem no mesmo projeto, revisem código e acompanhem tarefas. <br></br>
 
 #### Fluxo básico
 
@@ -32,6 +32,7 @@ colaborem no mesmo projeto, revisem código e acompanhem tarefas.
 -   `git commit` – salva uma versão com descrição
 -   `git push` – envia as versões para o GitHub
 -   `git pull` – traz atualizações do GitHub para o seu computador
+<br></br>
 
 ### Por que aprender?
 
@@ -39,6 +40,7 @@ colaborem no mesmo projeto, revisem código e acompanhem tarefas.
 2)  Colaboração: trabalhe com outras pessoas sem sobrescrever o trabalho
     delas
 3)  Portfólio: o GitHub é o currículo de quem programa 
+<br></br>
 
 ## GitHub
 
@@ -433,14 +435,14 @@ Agora faça novamente os passos descritos em **Criando repositório no
 GitHub**. Tenha certeza de criar uma nova pasta fora das pastas que você
 já está trabalhando.
 
-Abra o projeto do repositório clonado (CCBD_atividade4) no RStudio.
+Abra o projeto do repositório clonado (como_git-and-hub) no RStudio.
 Agora o repositório deve ser acessado pelo
-<https://github.com/SEU_USUÁRIO/ciencia_colab_a4>. Abra o arquivo
+<https://github.com/SEU_USUÁRIO/como_git-and-hub>. Abra o arquivo
 `partipantes.csv`, e edite adicionando seu nome e nome de usuário do
 `GitHub`. Salve, faça o `commit` e o `push`.
 
 Agora navegue até o [respositório da atividade
-4](https://github.com/cammcordeiro/ciencia_colab_a4) recém clonado e
+4](https://github.com/cammcordeiro/como_git-and-hub) recém clonado e
 clique em **Contribute**.
 
 <center><img src="figs/git_23.png" style="width:60%"/> <br><br></center>
@@ -452,18 +454,19 @@ Aparecerá uma nova página comparando o script antigo com o novo.
 Clique em **Create pull request**. Com o objetivo de facilitar a
 colaboração, é necessário que você comente o objetivo da sua
 contribuição.
+Agora que você fez um `pull request`, e basta aguardar o administrador
+do repositório analisar sua sugestão e fazer o `merge` no ramo
+**master**.
 
 <center><img src="figs/git_25.png" style="width:60%"/> <br><br></center>
 
 Clique novamente no botão **Create pull request** para confirmar sua
 contribuição. Visualize a página
-<https://cammcordeiro.github.io/ciencia_colab_a4> e veja como ficou.
+<https://cammcordeiro.github.io/como_git-and-hub> e veja como ficou.
 
 <center><img src="figs/git_26.png" style="width:60%"/> <br><br></center>
 
-Agora que você fez um `pull request`, e basta aguardar o administrador
-do repositório analisar sua sugestão e fazer o `merge` no ramo
-**master**.
+
 
 Para mais informações sobre o workflow usando o Github, acesse [Github
 Guides](https://guides.github.com/introduction/flow/). Um guia muito

@@ -1,0 +1,14 @@
+---
+title: "Participantes"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+```{r participantes, echo=FALSE, warning=FALSE}
+read.csv("participantes.csv", header = TRUE) %>% 
+  knitr::kable()
+```
+
